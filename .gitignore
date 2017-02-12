@@ -5,3 +5,7 @@ build/
 *.suo
 *.opendb
 *.db
+*.tlog
+*.log
+*.lastbuildstate
+*.unsuccessfulbuild
