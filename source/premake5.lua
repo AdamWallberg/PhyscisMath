@@ -36,4 +36,4 @@ project (PROJECT_NAME)
 	
 	targetdir "$(SolutionDir)../lib/"
 	debugdir "$(SolutionDir)../lib/"
-	targetname( PROJECT_NAME .. " - $(Configuration)" )
+	targetname( PROJECT_NAME .. "_$(Configuration)" )
