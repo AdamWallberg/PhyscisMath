@@ -7,7 +7,7 @@
 
 namespace pm
 {
-	
+
 class vec3
 {
 public:
@@ -43,11 +43,11 @@ public:
 		vec2 xy;
 	};
 
-////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////
 
-	// Methods
+		// Methods
 
-	// Performance heavy, use lengthSquared() when possible.
+		// Performance heavy, use lengthSquared() when possible.
 	inline const float length() const
 	{
 		return sqrt( lengthSquared() );
@@ -69,11 +69,11 @@ public:
 		const float length = this->length();
 
 		// return length if pointer is given
-		if (pOutLength)
+		if( pOutLength )
 			*pOutLength = length;
 
 		// Don't divide by zero
-		if (length != 0.0f)
+		if( length != 0.0f )
 		{
 			out.x = x / length;
 			out.y = y / length;

@@ -31,7 +31,7 @@ inline float abs( const float& value )
 {
 	if( value < 0.f )
 		return -value;
-	
+
 	return value;
 }
 
@@ -74,7 +74,7 @@ inline float sign( const float& value )
 		return 0.f;
 	if( value > 0.f )
 		return 1.f;
-	
+
 	return -1.f;
 }
 

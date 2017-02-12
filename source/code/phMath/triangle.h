@@ -4,7 +4,7 @@
 
 namespace pm
 {
-	
+
 // Represents a triangle in 3D space
 class triangle
 {

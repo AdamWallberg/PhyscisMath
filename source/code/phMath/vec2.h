@@ -19,10 +19,10 @@ public:
 
 	// Static instances
 	static const vec2 zero;
-					
+
 	static const vec2 posx;
 	static const vec2 negx;
-					
+
 	static const vec2 posy;
 	static const vec2 negy;
 
@@ -36,11 +36,11 @@ public:
 		};
 	};
 
-////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////
 
-	// Methods
+		// Methods
 
-	// Performance heavy, use lengthSquared() when possible.
+		// Performance heavy, use lengthSquared() when possible.
 	inline const float length() const
 	{
 		return sqrt( lengthSquared() );
@@ -62,11 +62,11 @@ public:
 		const float length = this->length();
 
 		// return length if pointer is given
-		if (pOutLength)
+		if( pOutLength )
 			*pOutLength = length;
 
 		// Don't divide by zero
-		if (length != 0.0f)
+		if( length != 0.0f )
 		{
 			out.x = x / length;
 			out.y = y / length;
@@ -117,7 +117,7 @@ public:
 	void operator /= ( const float in );
 
 	// Comparison operators
-	bool operator == ( const vec2& in ) const ;
+	bool operator == ( const vec2& in ) const;
 	bool operator != ( const vec2& in ) const;
 
 };

@@ -4,15 +4,15 @@ namespace pm
 {
 
 // Static const vectors
-const vec4 vec4::zero = vec4();
-const vec4 vec4::posx = vec4(  1.0f,  0.0f,  0.0f,  0.0f );
-const vec4 vec4::negx = vec4( -1.0f,  0.0f,  0.0f,  0.0f );
-const vec4 vec4::posy = vec4(  0.0f,  1.0f,  0.0f,  0.0f );
-const vec4 vec4::negy = vec4(  0.0f, -1.0f,  0.0f,  0.0f );
-const vec4 vec4::posz = vec4(  0.0f,  0.0f,  1.0f,  0.0f );
-const vec4 vec4::negz = vec4(  0.0f,  0.0f, -1.0f,  0.0f );
-const vec4 vec4::posw = vec4(  0.0f,  0.0f,  0.0f,  1.0f );
-const vec4 vec4::negw = vec4(  0.0f,  0.0f,  0.0f, -1.0f );
+const vec4 vec4::zero		= vec4();
+const vec4 vec4::posx		= vec4(  1.0f,  0.0f,  0.0f,  0.0f );
+const vec4 vec4::negx		= vec4( -1.0f,  0.0f,  0.0f,  0.0f );
+const vec4 vec4::posy		= vec4(  0.0f,  1.0f,  0.0f,  0.0f );
+const vec4 vec4::negy		= vec4(  0.0f, -1.0f,  0.0f,  0.0f );
+const vec4 vec4::posz		= vec4(  0.0f,  0.0f,  1.0f,  0.0f );
+const vec4 vec4::negz		= vec4(  0.0f,  0.0f, -1.0f,  0.0f );
+const vec4 vec4::posw		= vec4(  0.0f,  0.0f,  0.0f,  1.0f );
+const vec4 vec4::negw		= vec4(  0.0f,  0.0f,  0.0f, -1.0f );
 
 // Color constants
 const vec4 vec4::white		= vec4( 1.0f, 1.0f, 1.0f, 1.0f );

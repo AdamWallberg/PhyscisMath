@@ -33,10 +33,10 @@ public:
 		struct
 		{
 			// Instead of using padding floats, we align the vectors with 16 bytes
-			_declspec( align(16) ) vec3 left;
-			_declspec( align(16) ) vec3 up;
-			_declspec( align(16) ) vec3 forward;
-			_declspec( align(16) ) vec3 translation;
+			_declspec( align( 16 ) ) vec3 left;
+			_declspec( align( 16 ) ) vec3 up;
+			_declspec( align( 16 ) ) vec3 forward;
+			_declspec( align( 16 ) ) vec3 translation;
 		};
 	};
 
@@ -49,8 +49,8 @@ public:
 	mat4 GetViewMatrix() const;
 	mat4 GetInverse() const;
 
-	static mat4 Orthographic(float left, float right, float bottom, float top, float near, float far);
-	static mat4 Perspective(float fov, float aspectRatio, float near, float far);
+	static mat4 Orthographic( float left, float right, float bottom, float top, float near, float far );
+	static mat4 Perspective( float fov, float aspectRatio, float near, float far );
 
 	mat4 operator * ( const mat4& other );
 
