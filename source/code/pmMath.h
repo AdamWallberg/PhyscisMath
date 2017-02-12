@@ -1,28 +1,33 @@
 #pragma once
 
+namespace std
+{
 #include <math.h>
+}
 
 
+namespace pm
+{
 
 // Returns the square root of the specified value.
-inline float pmSqrt( const float& value )
+inline float sqrt( const float& value )
 {
-	return static_cast<float>( sqrt( value ) );
+	return static_cast<float>( std::sqrt( value ) );
 }
 
 
 
 // Returns pow of the specified base
-inline float pmPow( const float& base, const float& exponent )
+inline float pow( const float& base, const float& exponent )
 {
-	return static_cast<float>( pow( base, exponent ) );
+	return static_cast<float>( std::pow( base, exponent ) );
 }
 
 
 
 // Calculates and returns the absolute 
 // value of the specified float.
-inline float pmAbs( const float& value )
+inline float abs( const float& value )
 {
 	if( value < 0.f )
 		return -value;
@@ -34,7 +39,7 @@ inline float pmAbs( const float& value )
 
 // Clamps the specified value between the specified 
 // min and max values, and returns the result.
-inline float pmClamp( const float& value, const float& min, const float& max )
+inline float clamp( const float& value, const float& min, const float& max )
 {
 	if( value <= min )
 		return min;
@@ -48,7 +53,7 @@ inline float pmClamp( const float& value, const float& min, const float& max )
 
 // Clamps the specified value between 0 and 1 
 // and returns the result.
-inline float pmSaturate( float value )
+inline float saturate( float value )
 {
 	if( value <= 0.f )
 		return 0.f;
@@ -86,7 +91,7 @@ inline int sign( const int& value )
 
 // Converts degrees to radians.
 // Uses only multiplication with const value to optimize performance.
-inline float pmToRadians( const float& degrees )
+inline float toRadians( const float& degrees )
 {
 	return degrees * 0.0174532925f;
 }
@@ -95,7 +100,7 @@ inline float pmToRadians( const float& degrees )
 
 // Converts radians to degrees.
 // Uses only multiplication with const value to optimize performance.
-inline float pmToDegrees( const float& radians )
+inline float toDegrees( const float& radians )
 {
 	return radians * 57.2957795f;
 }
@@ -103,64 +108,64 @@ inline float pmToDegrees( const float& radians )
 
 
 // Returns sine from degrees.
-inline float pmSin( const float& degrees )
+inline float sin( const float& degrees )
 {
-	return static_cast<float>( sin( pmToRadians( degrees ) ) );
+	return static_cast<float>( std::sin( toRadians( degrees ) ) );
 }
 
 
 
 // Returns sine from radians.
-inline float pmSinRad( const float& radians )
+inline float sinRad( const float& radians )
 {
-	return static_cast<float>( sin( radians ) );
+	return static_cast<float>( std::sin( radians ) );
 }
 
 
 
 // Returns asin
-inline float pmASin( const float& sin )
+inline float asin( const float& sinValue )
 {
-	return pmToDegrees( static_cast<float>( asin( sin ) ) );
+	return toDegrees( static_cast<float>( std::asin( sinValue ) ) );
 }
 
 
 
 // Returns cosine from degrees.
-inline float pmCos( const float& degrees )
+inline float cos( const float& degrees )
 {
-	return static_cast<float>( cos( pmToRadians( degrees ) ) );
+	return static_cast<float>( std::cos( toRadians( degrees ) ) );
 }
 
 
 
 // Returns cosine from radians.
-inline float pmCosRad( const float& radians )
+inline float cosRad( const float& radians )
 {
-	return static_cast<float>( cos( radians ) );
+	return static_cast<float>( std::cos( radians ) );
 }
 
 
 
 // Returns acos
-inline float pmACos( const float& cos )
+inline float acos( const float& cosValue )
 {
-	return pmToDegrees( static_cast<float>( acos( cos ) ) );
+	return toDegrees( static_cast<float>( std::acos( cosValue ) ) );
 }
 
 
 
 // Returns tangent from degrees.
-inline float pmTan( const float& degrees )
+inline float tan( const float& degrees )
 {
-	return static_cast<float>( tan( pmToRadians( degrees ) ) );
+	return static_cast<float>( std::tan( toRadians( degrees ) ) );
 }
 
 
 // Returns atan
-inline float pmATan( const float& tan )
+inline float atan( const float& tanValue )
 {
-	return pmToDegrees( static_cast<float>( atan( tan ) ) );
+	return toDegrees( static_cast<float>( std::atan( tanValue ) ) );
 }
 
 
@@ -168,7 +173,7 @@ inline float pmATan( const float& tan )
 // Interpolates between two values using a factor.
 // factor 0 is no interpolation and factor 1 is full.
 // The interpolation can go outside range, both positive and negative.
-inline float pmLerp( const float& start, const float& end, const float& factor )
+inline float lerp( const float& start, const float& end, const float& factor )
 {
 	return start + ( end - start ) * factor;
 }
@@ -176,9 +181,9 @@ inline float pmLerp( const float& start, const float& end, const float& factor )
 
 
 // Cosine interpolates between the two given values using the factor.
-inline float pmInterpolateCos( const float& start, const float& end, const float& factor )
+inline float interpolateCosine( const float& start, const float& end, const float& factor )
 {
-	return start + ( end - start ) * ( ( -pmCos( factor * 180.0f ) + 1.0f ) * 0.5f );
+	return start + ( end - start ) * ( ( -cos( factor * 180.0f ) + 1.0f ) * 0.5f );
 }
 
 
@@ -203,4 +208,6 @@ inline float floorf( const float& value )
 inline float ceilf( const float& value )
 {
 	return static_cast<float>( static_cast<int>( value ) );
+}
+
 }

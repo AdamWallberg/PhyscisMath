@@ -3,30 +3,32 @@
 #include <string>
 
 #include "pmMath.h"
-#include "pmV2.h"
+#include "vec2.h"
 
-
-class pmV3
+namespace pm
+{
+	
+class vec3
 {
 public:
 
 	// Constructors / Destructor
-	pmV3( const float& x = 0.0f, const float& y = 0.0f, const float& z = 0.0f );
-	pmV3( const pmV3& rOther );
+	vec3( const float& x = 0.0f, const float& y = 0.0f, const float& z = 0.0f );
+	vec3( const vec3& rOther );
 
-	~pmV3();
+	~vec3();
 
 	// Static instances
-	static const pmV3 zero;
+	static const vec3 zero;
 
-	static const pmV3 posx;
-	static const pmV3 negx;
+	static const vec3 posx;
+	static const vec3 negx;
 
-	static const pmV3 posy;
-	static const pmV3 negy;
+	static const vec3 posy;
+	static const vec3 negy;
 
-	static const pmV3 posz;
-	static const pmV3 negz;
+	static const vec3 posz;
+	static const vec3 negz;
 
 	// Member variables
 	union
@@ -38,7 +40,7 @@ public:
 			float z;
 		};
 
-		pmV2 xy;
+		vec2 xy;
 	};
 
 ////////////////////////////////////////////////////////////////
@@ -48,7 +50,7 @@ public:
 	// Performance heavy, use lengthSquared() when possible.
 	inline const float length() const
 	{
-		return pmSqrt( lengthSquared() );
+		return sqrt( lengthSquared() );
 
 	} // length
 
@@ -61,9 +63,9 @@ public:
 	// Returns a normalized version of this vector. 
 	// normalize() automatically calculates the length
 	// of the vector, which can be stored in a float pointer.
-	inline const pmV3 normalize( float* pOutLength = nullptr ) const
+	inline const vec3 normalize( float* pOutLength = nullptr ) const
 	{
-		pmV3 out;
+		vec3 out;
 		const float length = this->length();
 
 		// return length if pointer is given
@@ -83,16 +85,16 @@ public:
 	} // normalize
 
 	// Dot product methods
-	inline const float dot( const pmV3& rOther ) const
+	inline const float dot( const vec3& rOther ) const
 	{
 		return x * rOther.x + y * rOther.y + z * rOther.z;
 
 	} // dot
 
 	// Cross product methods
-	inline const pmV3 cross( const pmV3& in ) const
+	inline const vec3 cross( const vec3& in ) const
 	{
-		return pmV3( y * in.z - in.y * z, z * in.x - in.z * x, x * in.y - in.x * y );
+		return vec3( y * in.z - in.y * z, z * in.x - in.z * x, x * in.y - in.x * y );
 
 	} // cross
 
@@ -106,31 +108,33 @@ public:
 ////////////////////////////////////////////////////////////////
 
 	// Addition operators
-	const pmV3 operator + ( const pmV3& in ) const;
-	const pmV3 operator + ( const float in ) const;
-	void operator += ( const pmV3& in );
+	const vec3 operator + ( const vec3& in ) const;
+	const vec3 operator + ( const float in ) const;
+	void operator += ( const vec3& in );
 	void operator += ( const float in );
 
 	// Subtraction operators
-	const pmV3 operator - ( const pmV3& in ) const;
-	const pmV3 operator - ( const float in ) const;
-	void operator -= ( const pmV3& in );
+	const vec3 operator - ( const vec3& in ) const;
+	const vec3 operator - ( const float in ) const;
+	void operator -= ( const vec3& in );
 	void operator -= ( const float in );
 
 	// Multiplication
-	const pmV3 operator * ( const pmV3& in ) const;
-	const pmV3 operator * ( const float in ) const;
-	void operator *= ( const pmV3& in );
+	const vec3 operator * ( const vec3& in ) const;
+	const vec3 operator * ( const float in ) const;
+	void operator *= ( const vec3& in );
 	void operator *= ( const float in );
 
 	// Division operators
-	const pmV3 operator / ( const pmV3& in ) const;
-	const pmV3 operator / ( const float in ) const;
-	void operator /= ( const pmV3& in );
+	const vec3 operator / ( const vec3& in ) const;
+	const vec3 operator / ( const float in ) const;
+	void operator /= ( const vec3& in );
 	void operator /= ( const float in );
 
 	// Comparison operators
-	bool operator == ( const pmV3& in ) const;
-	bool operator != ( const pmV3& in ) const;
+	bool operator == ( const vec3& in ) const;
+	bool operator != ( const vec3& in ) const;
 
 };
+
+}

@@ -4,25 +4,27 @@
 
 #include "pmMath.h"
 
+namespace pm
+{
 
-class pmV2
+class vec2
 {
 public:
 
 	// Constructors / Destructor
-	pmV2( const float& x = 0.0f, const float& y = 0.0f );
-	pmV2( const pmV2& rOther );
+	vec2( const float& x = 0.0f, const float& y = 0.0f );
+	vec2( const vec2& rOther );
 
-	~pmV2();
+	~vec2();
 
 	// Static instances
-	static const pmV2 zero;
+	static const vec2 zero;
 					
-	static const pmV2 posx;
-	static const pmV2 negx;
+	static const vec2 posx;
+	static const vec2 negx;
 					
-	static const pmV2 posy;
-	static const pmV2 negy;
+	static const vec2 posy;
+	static const vec2 negy;
 
 	// Member variables
 	union
@@ -41,7 +43,7 @@ public:
 	// Performance heavy, use lengthSquared() when possible.
 	inline const float length() const
 	{
-		return pmSqrt( lengthSquared() );
+		return sqrt( lengthSquared() );
 
 	} // length
 
@@ -54,9 +56,9 @@ public:
 	// Returns a normalized version of this vector. 
 	// normalize() automatically calculates the length
 	// of the vector, which can be stored in a float pointer.
-	inline const pmV2 normalize( float* pOutLength = nullptr ) const
+	inline const vec2 normalize( float* pOutLength = nullptr ) const
 	{
-		pmV2 out;
+		vec2 out;
 		const float length = this->length();
 
 		// return length if pointer is given
@@ -75,7 +77,7 @@ public:
 	} // normalize
 
 	// Dot product methods
-	inline const float& dot( const pmV2& rOther ) const
+	inline const float& dot( const vec2& rOther ) const
 	{
 		return x * rOther.x + y * rOther.y;
 
@@ -91,31 +93,33 @@ public:
 ////////////////////////////////////////////////////////////////
 
 	// Addition operators
-	const pmV2 operator + ( const pmV2& in ) const;
-	const pmV2 operator + ( const float in ) const;
-	void operator += ( const pmV2& in );
+	const vec2 operator + ( const vec2& in ) const;
+	const vec2 operator + ( const float in ) const;
+	void operator += ( const vec2& in );
 	void operator += ( const float in );
 
 	// Subtraction operators
-	const pmV2 operator - ( const pmV2& in ) const;
-	const pmV2 operator - ( const float in ) const;
-	void operator -= ( const pmV2& in );
+	const vec2 operator - ( const vec2& in ) const;
+	const vec2 operator - ( const float in ) const;
+	void operator -= ( const vec2& in );
 	void operator -= ( const float in );
 
 	// Multiplication
-	const pmV2 operator * ( const pmV2& in ) const;
-	const pmV2 operator * ( const float in ) const;
-	void operator *= ( const pmV2& in );
+	const vec2 operator * ( const vec2& in ) const;
+	const vec2 operator * ( const float in ) const;
+	void operator *= ( const vec2& in );
 	void operator *= ( const float in );
 
 	// Division operators
-	const pmV2 operator / ( const pmV2& in ) const;
-	const pmV2 operator / ( const float in ) const;
-	void operator /= ( const pmV2& in );
+	const vec2 operator / ( const vec2& in ) const;
+	const vec2 operator / ( const float in ) const;
+	void operator /= ( const vec2& in );
 	void operator /= ( const float in );
 
 	// Comparison operators
-	bool operator == ( const pmV2& in ) const ;
-	bool operator != ( const pmV2& in ) const;
+	bool operator == ( const vec2& in ) const ;
+	bool operator != ( const vec2& in ) const;
 
 };
+
+}

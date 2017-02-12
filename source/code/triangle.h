@@ -1,17 +1,20 @@
 #pragma once
 
-#include "pmV3.h"
+#include "vec3.h"
 
+namespace pm
+{
+	
 // Represents a triangle in 3D space
-class pmTriangle
+class triangle
 {
 public:
 
-	pmTriangle()
+	triangle()
 	{
 	}
 
-	pmTriangle( const pmV3& p1, const pmV3& p2, const pmV3& p3 )
+	triangle( const vec3& p1, const vec3& p2, const vec3& p3 )
 	{
 		this->p1 = p1;
 		this->p2 = p2;
@@ -20,7 +23,9 @@ public:
 
 	// TODO: Methods for line intersection, normals, area, etc..
 
-	pmV3 p1;
-	pmV3 p2;
-	pmV3 p3;
+	vec3 p1;
+	vec3 p2;
+	vec3 p3;
 };
+
+}

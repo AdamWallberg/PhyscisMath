@@ -1,8 +1,11 @@
-#include "phSystem.h"
+#include "mat4.h"
 
-#include "pmMat4.h"
+using namespace pm;
 
-pmMat4::pmMat4()
+namespace pm
+{
+
+mat4::mat4()
 {
 	// Set all elements to 0
 	memset( elements, 0, 16 * sizeof(float) );
@@ -10,9 +13,9 @@ pmMat4::pmMat4()
 
 
 
-pmMat4::pmMat4( const pmMat4& other )
+mat4::mat4( const mat4& other )
 {
-	for( uint8 i = 0; i < 16; i++ )
+	for( unsigned char i = 0; i < 16; i++ )
 	{
 		elements[i] = other.elements[i];
 	}
@@ -20,7 +23,7 @@ pmMat4::pmMat4( const pmMat4& other )
 
 
 
-pmMat4::pmMat4( const float diagonal )
+mat4::mat4( const float diagonal )
 {
 	// Set all elements to 0
 	memset( elements, 0, 16 * sizeof(float) );
@@ -34,29 +37,29 @@ pmMat4::pmMat4( const float diagonal )
 
 
 
-pmMat4::~pmMat4()
+mat4::~mat4()
 {
 }
 
 
 
-void pmMat4::Translate( const pmV3& translation )
+void mat4::Translate( const vec3& translation )
 {
 	this->translation += translation;
 }
 
 
-void pmMat4::RotateZYX( const pmV3& axis )
+void mat4::RotateZYX( const vec3& axis )
 {
-	float ca = pmCos(axis.x);
-	float sa = pmSin(axis.x);
-	float cb = pmCos(axis.y);
-	float sb = pmSin(axis.y);
-	float cc = pmCos(axis.z);
-	float sc = pmSin(axis.z);
+	float ca = cos(axis.x);
+	float sa = sin(axis.x);
+	float cb = cos(axis.y);
+	float sb = sin(axis.y);
+	float cc = cos(axis.z);
+	float sc = sin(axis.z);
 
 	// ZYX
-	pmMat4 result( 1.0f );
+	mat4 result( 1.0f );
 	result.left.x = cc * cb;
 	result.left.y = sc * cb;
 	result.left.z = -sb;
@@ -72,16 +75,16 @@ void pmMat4::RotateZYX( const pmV3& axis )
 	*this = result * *this;
 }
 
-void pmMat4::RotateXYZ( const pmV3& axis )
+void mat4::RotateXYZ( const vec3& axis )
 {
-	float ca = pmCos(axis.x);
-	float sa = pmSin(axis.x);
-	float cb = pmCos(axis.y);
-	float sb = pmSin(axis.y);
-	float cc = pmCos(axis.z);
-	float sc = pmSin(axis.z);
+	float ca = cos(axis.x);
+	float sa = sin(axis.x);
+	float cb = cos(axis.y);
+	float sb = sin(axis.y);
+	float cc = cos(axis.z);
+	float sc = sin(axis.z);
 
-	pmMat4 result(1.0f);
+	mat4 result(1.0f);
 	result.left.x = cb * cc;
 	result.left.y = sa * sb * cc + ca * sc;
 	result.left.z = -ca * sb * cc + sa * sc;
@@ -99,7 +102,7 @@ void pmMat4::RotateXYZ( const pmV3& axis )
 
 
 
-void pmMat4::Scale( const pmV3& scale )
+void mat4::Scale( const vec3& scale )
 {
 	elements[ 0 + 0 * 4 ] = scale.x;
 	elements[ 1 + 1 * 4 ] = scale.y;
@@ -108,12 +111,12 @@ void pmMat4::Scale( const pmV3& scale )
 
 
 
-void pmMat4::Transpose()
+void mat4::Transpose()
 {
-	pmMat4 result(1);
-	for( uint8 c = 0; c < 4; ++c )
+	mat4 result(1);
+	for( unsigned char c = 0; c < 4; ++c )
 	{
-		for( uint8 r = 0; r < 4; ++r )
+		for( unsigned char r = 0; r < 4; ++r )
 		{
 			result.elements[c + r * 4] = elements[r + c * 4];
 		}
@@ -124,9 +127,9 @@ void pmMat4::Transpose()
 
 
 
-pmMat4 pmMat4::GetViewMatrix() const
+mat4 mat4::GetViewMatrix() const
 {
-	pmMat4 result(1.0f);
+	mat4 result(1.0f);
 	
 	result.left.x = left.x;
 	result.left.y = up.x;
@@ -149,7 +152,7 @@ pmMat4 pmMat4::GetViewMatrix() const
 
 
 
-pmMat4 pmMat4::GetInverse() const
+mat4 mat4::GetInverse() const
 {
 	float temp[ 16 ];
 
@@ -268,9 +271,9 @@ pmMat4 pmMat4::GetInverse() const
 	float determinant = elements[ 0 ] * temp[ 0 ] + elements[ 1 ] * temp[ 4 ] + elements[ 2 ] * temp[ 8 ] + elements[ 3 ] * temp[ 12 ];
 	determinant = 1.0f / determinant;
 
-	pmMat4 result(0.0f);
+	mat4 result(0.0f);
 
-	for( uint8 i = 0; i < 4 * 4; i++ )
+	for( unsigned char i = 0; i < 4 * 4; i++ )
 		result.elements[ i ] = temp[ i ] * determinant;
 
 	return result;
@@ -278,9 +281,9 @@ pmMat4 pmMat4::GetInverse() const
 
 
 
-pmMat4 pmMat4::Orthographic( float left, float right, float bottom, float top, float near, float far )
+mat4 mat4::Orthographic( float left, float right, float bottom, float top, float near, float far )
 {
-	pmMat4 result(1.0f);
+	mat4 result(1.0f);
 
 	result.elements[0 + 0 * 4] = 2.0f / (right - left);
 	result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
@@ -295,12 +298,12 @@ pmMat4 pmMat4::Orthographic( float left, float right, float bottom, float top, f
 
 
 
-pmMat4 pmMat4::Perspective( float fov, float aspectRatio, float near, float far )
+mat4 mat4::Perspective( float fov, float aspectRatio, float near, float far )
 {
-	pmMat4 result(0.0f);
+	mat4 result(0.0f);
 
-	result.left.x = (1.0f / pmTan(fov * 0.5f)) / aspectRatio;
-	result.up.y = 1.0f / pmTan(fov * 0.5f);
+	result.left.x = (1.0f / tan(fov * 0.5f)) / aspectRatio;
+	result.up.y = 1.0f / tan(fov * 0.5f);
 	result.forward.z = (near + far) / (near - far);
 	result.translation.z = (2.0f * near * far) / (near - far);
 	result.elements[11] = -1.0f;
@@ -310,16 +313,16 @@ pmMat4 pmMat4::Perspective( float fov, float aspectRatio, float near, float far 
 
 
 
-pmMat4 pmMat4::operator*( const pmMat4& other )
+mat4 mat4::operator*( const mat4& other )
 {
-	pmMat4 result;
+	mat4 result;
 	float sum;
-	for( uint8 row = 0; row < 4; ++row )
+	for( unsigned char row = 0; row < 4; ++row )
 	{
-		for( uint8 col = 0; col < 4; ++col )
+		for( unsigned char col = 0; col < 4; ++col )
 		{
 			sum = 0.0f;
-			for( uint8 i = 0; i < 4; ++i )
+			for( unsigned char i = 0; i < 4; ++i )
 			{
 				sum += elements[ i + row * 4 ] * other.elements[ col + i * 4 ];
 			}
@@ -330,3 +333,4 @@ pmMat4 pmMat4::operator*( const pmMat4& other )
 	return result;
 }
 
+}

@@ -1,3 +1,7 @@
 *.sln
 *.vcxproj
 *.user
+build/
+*.suo
+*.opendb
+*.db

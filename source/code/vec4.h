@@ -3,44 +3,47 @@
 #include <string>
 
 #include "pmMath.h"
-#include "pmV2.h"
-#include "pmV3.h"
+#include "vec2.h"
+#include "vec3.h"
 
-class pmV4
+namespace pm
+{
+
+class vec4
 {
 public:
 
 	// Constructors / Destructor
-	pmV4( const float& x = 0.0f, const float& y = 0.0f, const float& z = 0.0f, const float& w = 0.0f );
-	pmV4( const pmV4& rOther );
+	vec4( const float& x = 0.0f, const float& y = 0.0f, const float& z = 0.0f, const float& w = 0.0f );
+	vec4( const vec4& rOther );
 
-	~pmV4();
+	~vec4();
 
 	// Static instances
-	static const pmV4 zero;
+	static const vec4 zero;
 
-	static const pmV4 posx;
-	static const pmV4 negx;
+	static const vec4 posx;
+	static const vec4 negx;
 
-	static const pmV4 posy;
-	static const pmV4 negy;
+	static const vec4 posy;
+	static const vec4 negy;
 
-	static const pmV4 posz;
-	static const pmV4 negz;
+	static const vec4 posz;
+	static const vec4 negz;
 
-	static const pmV4 posw;
-	static const pmV4 negw;
+	static const vec4 posw;
+	static const vec4 negw;
 
 	// Color constants
-	static const pmV4 white;
-	static const pmV4 black;
-	static const pmV4 gray;
-	static const pmV4 red;
-	static const pmV4 green;
-	static const pmV4 blue;
-	static const pmV4 magenta;
-	static const pmV4 yellow;
-	static const pmV4 turquoise;
+	static const vec4 white;
+	static const vec4 black;
+	static const vec4 gray;
+	static const vec4 red;
+	static const vec4 green;
+	static const vec4 blue;
+	static const vec4 magenta;
+	static const vec4 yellow;
+	static const vec4 turquoise;
 
 	// Member variables
 	union
@@ -52,8 +55,8 @@ public:
 			float z;
 			float w;
 		};
-		pmV2 xy;
-		pmV3 xyz;
+		vec2 xy;
+		vec3 xyz;
 		struct
 		{
 			float r;
@@ -61,8 +64,8 @@ public:
 			float b;
 			float a;
 		};
-		pmV2 rg;
-		pmV3 rgb;
+		vec2 rg;
+		vec3 rgb;
 	};
 
 ////////////////////////////////////////////////////////////////
@@ -72,7 +75,7 @@ public:
 	// Performance heavy, use lengthSquared() when possible.
 	inline const float length() const
 	{
-		return pmSqrt( lengthSquared() );
+		return sqrt( lengthSquared() );
 
 	} // length
 
@@ -85,9 +88,9 @@ public:
 	// Returns a normalized version of this vector. 
 	// normalize() automatically calculates the length
 	// of the vector, which can be stored in a float pointer.
-	inline const pmV4 normalize( float* pOutLength = nullptr ) const
+	inline const vec4 normalize( float* pOutLength = nullptr ) const
 	{
-		pmV4 out;
+		vec4 out;
 		const float length = this->length();
 
 		// return length if pointer is given
@@ -108,7 +111,7 @@ public:
 	} // normalize
 
 	// Dot product methods
-	inline const float& dot( const pmV4& rOther ) const
+	inline const float& dot( const vec4& rOther ) const
 	{
 		return x * rOther.x + y * rOther.y + z * rOther.z + w * rOther.w;
 
@@ -124,31 +127,34 @@ public:
 ////////////////////////////////////////////////////////////////
 
 	// Addition operators
-	const pmV4 operator + ( const pmV4& in ) const;
-	const pmV4 operator + ( const float in ) const;
-	void operator += ( const pmV4& in );
+	const vec4 operator + ( const vec4& in ) const;
+	const vec4 operator + ( const float in ) const;
+	void operator += ( const vec4& in );
 	void operator += ( const float in );
 
 	// Subtraction operators
-	const pmV4 operator - ( const pmV4& in ) const;
-	const pmV4 operator - ( const float in ) const;
-	void operator -= ( const pmV4& in );
+	const vec4 operator - ( const vec4& in ) const;
+	const vec4 operator - ( const float in ) const;
+	void operator -= ( const vec4& in );
 	void operator -= ( const float in );
 
 	// Multiplication
-	const pmV4 operator * ( const pmV4& in ) const;
-	const pmV4 operator * ( const float in ) const;
-	void operator *= ( const pmV4& in );
+	const vec4 operator * ( const vec4& in ) const;
+	const vec4 operator * ( const float in ) const;
+	void operator *= ( const vec4& in );
 	void operator *= ( const float in );
 
 	// Division operators
-	const pmV4 operator / ( const pmV4& in ) const;
-	const pmV4 operator / ( const float in ) const;
-	void operator /= ( const pmV4& in );
+	const vec4 operator / ( const vec4& in ) const;
+	const vec4 operator / ( const float in ) const;
+	void operator /= ( const vec4& in );
 	void operator /= ( const float in );
 
 	// Comparison operators
-	bool operator == ( const pmV4& in ) const ;
-	bool operator != ( const pmV4& in ) const;
+	bool operator == ( const vec4& in ) const ;
+	bool operator != ( const vec4& in ) const;
 
 };
+
+}
+
