@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "pmMath.h"
+#include "math.h"
 
 namespace pm
 {
