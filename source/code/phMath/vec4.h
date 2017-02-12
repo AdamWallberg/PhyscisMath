@@ -135,6 +135,7 @@ public:
 	// Subtraction operators
 	const vec4 operator - ( const vec4& in ) const;
 	const vec4 operator - ( const float in ) const;
+	const vec4 operator - () const;
 	void operator -= ( const vec4& in );
 	void operator -= ( const float in );
 

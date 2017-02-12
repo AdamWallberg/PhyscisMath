@@ -76,6 +76,11 @@ const vec2 vec2::operator - ( const float in ) const
 
 } // operator -
 
+const vec2 vec2::operator - () const
+{
+	return vec2( -x, -y );
+}
+
 
 
 void vec2::operator -= ( const vec2& in )

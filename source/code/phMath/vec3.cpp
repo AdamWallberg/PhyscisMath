@@ -82,6 +82,11 @@ const vec3 vec3::operator - ( const float in ) const
 
 } // operator -
 
+const vec3 vec3::operator - () const
+{
+	return vec3( -x, -y, -z );
+}
+
 
 
 void vec3::operator -= ( const vec3& in )

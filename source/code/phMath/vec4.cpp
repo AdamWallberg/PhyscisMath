@@ -98,6 +98,11 @@ const vec4 vec4::operator - ( const float in ) const
 
 } // operator -
 
+const vec4 vec4::operator - () const
+{
+	return vec4( -x, -y, -z, -w );
+}
+
 
 
 void vec4::operator -= ( const vec4& in )
