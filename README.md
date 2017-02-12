@@ -1,4 +1,4 @@
-# PhyscisMath
+# Physcis Math
 Math library made for Physcis Engine.
 
 This library contains basic math functions, classes for 2D, 3D, and 4D vectors, and 4x4 matrices. 
