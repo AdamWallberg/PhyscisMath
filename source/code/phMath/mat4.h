@@ -60,6 +60,7 @@ public:
 	static mat4 Perspective( float fov, float aspectRatio, float near, float far );
 
 	mat4 operator * ( const mat4& other );
+	float& operator [] (unsigned char id);
 
 };
 

@@ -351,4 +351,11 @@ mat4 mat4::operator*( const mat4& other )
 	return result;
 }
 
+
+
+float& mat4::operator[]( unsigned char id )
+{
+	return elements[id];
+}
+
 }
