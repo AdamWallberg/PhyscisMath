@@ -127,6 +127,24 @@ void mat4::Transpose()
 
 
 
+void mat4::Orthonormalize()
+{
+	Orthogonalize();
+	left.normalize();
+	up.normalize();
+	forward.normalize();
+}
+
+
+
+void mat4::Orthogonalize()
+{
+	left = forward.cross( up );
+	up = left.cross( forward );
+}
+
+
+
 mat4 mat4::GetViewMatrix() const
 {
 	mat4 result( 1.0f );

@@ -46,6 +46,13 @@ public:
 	void Scale( const vec3& scale );
 	void Transpose();
 
+	// Orthogonalizes this matrix, then normalizes it. 
+	void Orthonormalize();
+
+	// Orthogonalizes this matrix using the following priority order:
+	// forward-up-left
+	void Orthogonalize();
+
 	mat4 GetViewMatrix() const;
 	mat4 GetInverse() const;
 
