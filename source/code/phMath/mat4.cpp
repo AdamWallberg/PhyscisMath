@@ -127,6 +127,24 @@ void mat4::Transpose()
 
 
 
+void mat4::Orthonormalize()
+{
+	Orthogonalize();
+	left.normalize();
+	up.normalize();
+	forward.normalize();
+}
+
+
+
+void mat4::Orthogonalize()
+{
+	left = forward.cross( up );
+	up = left.cross( forward );
+}
+
+
+
 mat4 mat4::GetViewMatrix() const
 {
 	mat4 result( 1.0f );
@@ -336,6 +354,13 @@ mat4 mat4::operator*( const mat4& other )
 	}
 
 	return result;
+}
+
+
+
+float& mat4::operator[]( unsigned char id )
+{
+	return elements[id];
 }
 
 }
