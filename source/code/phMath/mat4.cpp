@@ -283,15 +283,20 @@ mat4 mat4::GetInverse() const
 
 mat4 mat4::Orthographic( float left, float right, float bottom, float top, float near, float far )
 {
-	mat4 result( 1.0f );
+	mat4 result;
 
-	result.elements[0 + 0 * 4] = 2.0f / ( right - left );
-	result.elements[1 + 1 * 4] = 2.0f / ( top - bottom );
-	result.elements[2 + 2 * 4] = 2.0f / ( near - far );
+	float W = right - left;
+	float H = top - bottom;
+	float D = far - near;
 
-	result.elements[3 + 0 * 4] = ( left + right ) / ( left - right );
-	result.elements[3 + 1 * 4] = ( bottom + top ) / ( bottom - top );
-	result.elements[3 + 2 * 4] = ( far + near ) / ( far - near );
+	result.left.x = 2.0f / W;
+	result.up.y = 2.0f / H;
+	result.forward.z = -2.0f / D;
+
+	result.translation.x = -( ( right + left ) / W );
+	result.translation.y = -( ( top + bottom ) / H );
+	result.translation.z = -( ( far + near ) / D );
+	result.elements[15] = 1.0f;
 
 	return result;
 }
