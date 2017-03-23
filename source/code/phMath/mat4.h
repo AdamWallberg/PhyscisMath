@@ -43,6 +43,7 @@ public:
 	void Translate( const vec3& translation );
 	void RotateZYX( const vec3& axis ); // Recommended for camera rotation
 	void RotateXYZ( const vec3& axis );
+	void SetRotation( const vec3& axis ); 
 	void Scale( const vec3& scale );
 	void Transpose();
 
