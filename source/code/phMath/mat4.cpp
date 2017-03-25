@@ -1,5 +1,19 @@
 #include "mat4.h"
 
+#define MULTIPLY_THIS( ORDER, RESULT ) \
+if( ORDER == COMBINE_REPLACE ) \
+{ \
+	*this = RESULT; \
+} \
+else if( ORDER == COMBINE_POST_MULTIPLY ) \
+{ \
+	*this = *this * RESULT; \
+} \
+else if( ORDER == COMBINE_PRE_MULTIPLY ) \
+{ \
+	*this = RESULT * *this; \
+} \
+
 using namespace pm;
 
 namespace pm
@@ -43,13 +57,16 @@ mat4::~mat4()
 
 
 
-void mat4::Translate( const vec3& translation )
+void mat4::Translate( const vec3& translation, EMultiplyOrder Order )
 {
-	this->translation += translation;
+	mat4 Result(1.0f);
+	Result.translation = translation;
+
+	MULTIPLY_THIS( Order, Result );
 }
 
 
-void mat4::RotateZYX( const vec3& axis )
+void mat4::RotateZYX( const vec3& axis, EMultiplyOrder Order )
 {
 	float ca = cos( axis.x );
 	float sa = sin( axis.x );
@@ -72,10 +89,10 @@ void mat4::RotateZYX( const vec3& axis )
 	result.forward.y = -cc * sa + sc * sb * ca;
 	result.forward.z = cb * ca;
 
-	*this = result * *this;
+	MULTIPLY_THIS( Order, result );
 }
 
-void mat4::RotateXYZ( const vec3& axis )
+void mat4::RotateXYZ( const vec3& axis, EMultiplyOrder Order )
 {
 	float ca = cos( axis.x );
 	float sa = sin( axis.x );
@@ -97,42 +114,11 @@ void mat4::RotateXYZ( const vec3& axis )
 	result.forward.y = -sa * cb;
 	result.forward.z = ca * cb;
 
-	*this = result * *this;
+	MULTIPLY_THIS( Order, result );
 }
 
 
-
-void mat4::SetRotation( const vec3& axis )
-{
-	float ca = cos( axis.x );
-	float sa = sin( axis.x );
-	float cb = cos( axis.y );
-	float sb = sin( axis.y );
-	float cc = cos( axis.z );
-	float sc = sin( axis.z );
-
-	mat4 result( 1.0f );
-	result.left.x = cb * cc;
-	result.left.y = sa * sb * cc + ca * sc;
-	result.left.z = -ca * sb * cc + sa * sc;
-
-	result.up.x = -cb * sc;
-	result.up.y = -sa * sb * sc + ca * cc;
-	result.up.z = ca * sb * sc + sa * cc;
-
-	result.forward.x = sb;
-	result.forward.y = -sa * cb;
-	result.forward.z = ca * cb;
-
-	mat4 translationMatrix(1.0f);
-	translationMatrix.Translate(translation);
-
-	*this = result * translationMatrix;
-}
-
-
-
-void mat4::Scale( const vec3& scale )
+void mat4::Scale( const vec3& scale, EMultiplyOrder Order )
 {
 	elements[0 + 0 * 4] = scale.x;
 	elements[1 + 1 * 4] = scale.y;

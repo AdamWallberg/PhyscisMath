@@ -9,6 +9,13 @@ class mat4
 {
 public:
 
+	enum EMultiplyOrder
+	{
+		COMBINE_REPLACE,
+		COMBINE_PRE_MULTIPLY,
+		COMBINE_POST_MULTIPLY
+	};
+
 	// Sets all values to 0 as default
 	mat4();
 	mat4( const mat4& other );
@@ -40,11 +47,10 @@ public:
 		};
 	};
 
-	void Translate( const vec3& translation );
-	void RotateZYX( const vec3& axis ); // Recommended for camera rotation
-	void RotateXYZ( const vec3& axis );
-	void SetRotation( const vec3& axis ); 
-	void Scale( const vec3& scale );
+	void Translate( const vec3& translation, EMultiplyOrder Order = COMBINE_POST_MULTIPLY );
+	void RotateZYX( const vec3& axis, EMultiplyOrder Order = COMBINE_POST_MULTIPLY ); // Recommended for camera rotation
+	void RotateXYZ( const vec3& axis, EMultiplyOrder Order = COMBINE_POST_MULTIPLY );
+	void Scale( const vec3& scale, EMultiplyOrder Order = COMBINE_POST_MULTIPLY );
 	void Transpose();
 
 	// Orthogonalizes this matrix, then normalizes it. 
