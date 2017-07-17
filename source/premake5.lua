@@ -5,6 +5,8 @@ require 'settings'
 solution (SOLUTION_NAME)
 	configurations { "Debug", "Release" }
 	
+	systemversion "10.0.14393.0" 
+	
 	platforms {
 		"Win32",
 		"Win64"
@@ -20,7 +22,7 @@ solution (SOLUTION_NAME)
 		
 	configuration { "Debug" }
 		defines { "DEBUG" }
-		flags { "Symbols" }
+		symbols "On"
 		
 	configuration { "Release" }
 		defines { "RELEASE", "NDEBUG" }
