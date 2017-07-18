@@ -25,8 +25,6 @@ mat4::mat4()
 	memset(elements, 0, 16 * sizeof(float));
 }
 
-
-
 mat4::mat4(const mat4& other)
 {
 	for (unsigned char i = 0; i < 16; i++)
@@ -34,8 +32,6 @@ mat4::mat4(const mat4& other)
 		elements[i] = other.elements[i];
 	}
 }
-
-
 
 mat4::mat4(const float diagonal)
 {
@@ -49,13 +45,9 @@ mat4::mat4(const float diagonal)
 	}
 }
 
-
-
 mat4::~mat4()
 {
 }
-
-
 
 void mat4::translate(const vec3& translation, EMultiplyOrder Order)
 {
@@ -64,7 +56,6 @@ void mat4::translate(const vec3& translation, EMultiplyOrder Order)
 
 	MULTIPLY_THIS(Order, Result);
 }
-
 
 void mat4::rotateZYX(const vec3& axis, EMultiplyOrder Order)
 {
@@ -117,15 +108,12 @@ void mat4::rotateXYZ(const vec3& axis, EMultiplyOrder Order)
 	MULTIPLY_THIS(Order, result);
 }
 
-
 void mat4::scale(const vec3& scale, EMultiplyOrder Order)
 {
 	elements[0 + 0 * 4] = scale.x;
 	elements[1 + 1 * 4] = scale.y;
 	elements[2 + 2 * 4] = scale.z;
 }
-
-
 
 void mat4::transpose()
 {
@@ -141,8 +129,6 @@ void mat4::transpose()
 	*this = result;
 }
 
-
-
 void mat4::orthonormalize()
 {
 	orthogonalize();
@@ -151,15 +137,11 @@ void mat4::orthonormalize()
 	forward.normalize();
 }
 
-
-
 void mat4::orthogonalize()
 {
 	left = forward.cross(up);
 	up = left.cross(forward);
 }
-
-
 
 mat4 mat4::getViewMatrix() const
 {
@@ -184,137 +166,6 @@ mat4 mat4::getViewMatrix() const
 	return result;
 }
 
-
-
-mat4 mat4::getInverse() const
-{
-	float temp[16];
-
-	temp[0] = elements[5] * elements[10] * elements[15] -
-		elements[5] * elements[11] * elements[14] -
-		elements[9] * elements[6] * elements[15] +
-		elements[9] * elements[7] * elements[14] +
-		elements[13] * elements[6] * elements[11] -
-		elements[13] * elements[7] * elements[10];
-
-	temp[4] = -elements[4] * elements[10] * elements[15] +
-		elements[4] * elements[11] * elements[14] +
-		elements[8] * elements[6] * elements[15] -
-		elements[8] * elements[7] * elements[14] -
-		elements[12] * elements[6] * elements[11] +
-		elements[12] * elements[7] * elements[10];
-
-	temp[8] = elements[4] * elements[9] * elements[15] -
-		elements[4] * elements[11] * elements[13] -
-		elements[8] * elements[5] * elements[15] +
-		elements[8] * elements[7] * elements[13] +
-		elements[12] * elements[5] * elements[11] -
-		elements[12] * elements[7] * elements[9];
-
-	temp[12] = -elements[4] * elements[9] * elements[14] +
-		elements[4] * elements[10] * elements[13] +
-		elements[8] * elements[5] * elements[14] -
-		elements[8] * elements[6] * elements[13] -
-		elements[12] * elements[5] * elements[10] +
-		elements[12] * elements[6] * elements[9];
-
-	temp[1] = -elements[1] * elements[10] * elements[15] +
-		elements[1] * elements[11] * elements[14] +
-		elements[9] * elements[2] * elements[15] -
-		elements[9] * elements[3] * elements[14] -
-		elements[13] * elements[2] * elements[11] +
-		elements[13] * elements[3] * elements[10];
-
-	temp[5] = elements[0] * elements[10] * elements[15] -
-		elements[0] * elements[11] * elements[14] -
-		elements[8] * elements[2] * elements[15] +
-		elements[8] * elements[3] * elements[14] +
-		elements[12] * elements[2] * elements[11] -
-		elements[12] * elements[3] * elements[10];
-
-	temp[9] = -elements[0] * elements[9] * elements[15] +
-		elements[0] * elements[11] * elements[13] +
-		elements[8] * elements[1] * elements[15] -
-		elements[8] * elements[3] * elements[13] -
-		elements[12] * elements[1] * elements[11] +
-		elements[12] * elements[3] * elements[9];
-
-	temp[13] = elements[0] * elements[9] * elements[14] -
-		elements[0] * elements[10] * elements[13] -
-		elements[8] * elements[1] * elements[14] +
-		elements[8] * elements[2] * elements[13] +
-		elements[12] * elements[1] * elements[10] -
-		elements[12] * elements[2] * elements[9];
-
-	temp[2] = elements[1] * elements[6] * elements[15] -
-		elements[1] * elements[7] * elements[14] -
-		elements[5] * elements[2] * elements[15] +
-		elements[5] * elements[3] * elements[14] +
-		elements[13] * elements[2] * elements[7] -
-		elements[13] * elements[3] * elements[6];
-
-	temp[6] = -elements[0] * elements[6] * elements[15] +
-		elements[0] * elements[7] * elements[14] +
-		elements[4] * elements[2] * elements[15] -
-		elements[4] * elements[3] * elements[14] -
-		elements[12] * elements[2] * elements[7] +
-		elements[12] * elements[3] * elements[6];
-
-	temp[10] = elements[0] * elements[5] * elements[15] -
-		elements[0] * elements[7] * elements[13] -
-		elements[4] * elements[1] * elements[15] +
-		elements[4] * elements[3] * elements[13] +
-		elements[12] * elements[1] * elements[7] -
-		elements[12] * elements[3] * elements[5];
-
-	temp[14] = -elements[0] * elements[5] * elements[14] +
-		elements[0] * elements[6] * elements[13] +
-		elements[4] * elements[1] * elements[14] -
-		elements[4] * elements[2] * elements[13] -
-		elements[12] * elements[1] * elements[6] +
-		elements[12] * elements[2] * elements[5];
-
-	temp[3] = -elements[1] * elements[6] * elements[11] +
-		elements[1] * elements[7] * elements[10] +
-		elements[5] * elements[2] * elements[11] -
-		elements[5] * elements[3] * elements[10] -
-		elements[9] * elements[2] * elements[7] +
-		elements[9] * elements[3] * elements[6];
-
-	temp[7] = elements[0] * elements[6] * elements[11] -
-		elements[0] * elements[7] * elements[10] -
-		elements[4] * elements[2] * elements[11] +
-		elements[4] * elements[3] * elements[10] +
-		elements[8] * elements[2] * elements[7] -
-		elements[8] * elements[3] * elements[6];
-
-	temp[11] = -elements[0] * elements[5] * elements[11] +
-		elements[0] * elements[7] * elements[9] +
-		elements[4] * elements[1] * elements[11] -
-		elements[4] * elements[3] * elements[9] -
-		elements[8] * elements[1] * elements[7] +
-		elements[8] * elements[3] * elements[5];
-
-	temp[15] = elements[0] * elements[5] * elements[10] -
-		elements[0] * elements[6] * elements[9] -
-		elements[4] * elements[1] * elements[10] +
-		elements[4] * elements[2] * elements[9] +
-		elements[8] * elements[1] * elements[6] -
-		elements[8] * elements[2] * elements[5];
-
-	float determinant = elements[0] * temp[0] + elements[1] * temp[4] + elements[2] * temp[8] + elements[3] * temp[12];
-	determinant = 1.0f / determinant;
-
-	mat4 result(0.0f);
-
-	for (unsigned char i = 0; i < 4 * 4; i++)
-		result.elements[i] = temp[i] * determinant;
-
-	return result;
-}
-
-
-
 mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far)
 {
 	mat4 result;
@@ -335,8 +186,6 @@ mat4 mat4::orthographic(float left, float right, float bottom, float top, float 
 	return result;
 }
 
-
-
 mat4 mat4::perspective(float fov, float aspectRatio, float near, float far)
 {
 	mat4 result(0.0f);
@@ -349,8 +198,6 @@ mat4 mat4::perspective(float fov, float aspectRatio, float near, float far)
 
 	return result;
 }
-
-
 
 mat4 mat4::operator*(const mat4& other)
 {
@@ -371,8 +218,6 @@ mat4 mat4::operator*(const mat4& other)
 
 	return result;
 }
-
-
 
 float& mat4::operator[](unsigned char id)
 {
