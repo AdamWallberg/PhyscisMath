@@ -5,13 +5,16 @@ namespace std
 #include <math.h>
 }
 
+#define FLOAT_S(X) static_cast<float>(X)
+#define INT_S(X) static_cast<int>(X)
+
 namespace pm
 {
 
 // Returns the square root of the specified value.
 inline float sqrt(const float& value)
 {
-	return static_cast<float>(std::sqrt(value));
+	return FLOAT_S(std::sqrt(value));
 }
 
 
@@ -19,7 +22,7 @@ inline float sqrt(const float& value)
 // Returns pow of the specified base
 inline float pow(const float& base, const float& exponent)
 {
-	return static_cast<float>(std::pow(base, exponent));
+	return FLOAT_S(std::pow(base, exponent));
 }
 
 
@@ -109,7 +112,7 @@ inline float toDegrees(const float& radians)
 // Returns sine from degrees.
 inline float sin(const float& degrees)
 {
-	return static_cast<float>(std::sin(toRadians(degrees)));
+	return FLOAT_S(std::sin(toRadians(degrees)));
 }
 
 
@@ -117,7 +120,7 @@ inline float sin(const float& degrees)
 // Returns sine from radians.
 inline float sinRad(const float& radians)
 {
-	return static_cast<float>(std::sin(radians));
+	return FLOAT_S(std::sin(radians));
 }
 
 
@@ -125,7 +128,7 @@ inline float sinRad(const float& radians)
 // Returns asin
 inline float asin(const float& sinValue)
 {
-	return toDegrees(static_cast<float>(std::asin(sinValue)));
+	return toDegrees(FLOAT_S(std::asin(sinValue)));
 }
 
 
@@ -133,7 +136,7 @@ inline float asin(const float& sinValue)
 // Returns cosine from degrees.
 inline float cos(const float& degrees)
 {
-	return static_cast<float>(std::cos(toRadians(degrees)));
+	return FLOAT_S(std::cos(toRadians(degrees)));
 }
 
 
@@ -141,7 +144,7 @@ inline float cos(const float& degrees)
 // Returns cosine from radians.
 inline float cosRad(const float& radians)
 {
-	return static_cast<float>(std::cos(radians));
+	return FLOAT_S(std::cos(radians));
 }
 
 
@@ -149,7 +152,7 @@ inline float cosRad(const float& radians)
 // Returns acos
 inline float acos(const float& cosValue)
 {
-	return toDegrees(static_cast<float>(std::acos(cosValue)));
+	return toDegrees(FLOAT_S(std::acos(cosValue)));
 }
 
 
@@ -157,14 +160,14 @@ inline float acos(const float& cosValue)
 // Returns tangent from degrees.
 inline float tan(const float& degrees)
 {
-	return static_cast<float>(std::tan(toRadians(degrees)));
+	return FLOAT_S(std::tan(toRadians(degrees)));
 }
 
 
 // Returns atan
 inline float atan(const float& tanValue)
 {
-	return toDegrees(static_cast<float>(std::atan(tanValue)));
+	return toDegrees(FLOAT_S(std::atan(tanValue)));
 }
 
 
@@ -190,7 +193,7 @@ inline float interpolateCosine(const float& start, const float& end, const float
 // Rounds value to nearest whole number
 inline float roundf(const float& value)
 {
-	return static_cast<float>(static_cast<int>(value + 0.5f));
+	return FLOAT_S(INT_S(value + 0.5f));
 }
 
 
@@ -198,7 +201,7 @@ inline float roundf(const float& value)
 // Rounds value downwards
 inline float floorf(const float& value)
 {
-	return static_cast<float>(static_cast<int>(value + 1.0f));
+	return FLOAT_S(INT_S(value + 1.0f));
 }
 
 
@@ -206,7 +209,10 @@ inline float floorf(const float& value)
 // Rounds value upwards
 inline float ceilf(const float& value)
 {
-	return static_cast<float>(static_cast<int>(value));
+	return FLOAT_S(INT_S(value));
 }
 
 }
+
+#undef FLOAT_S
+#undef INT_S
