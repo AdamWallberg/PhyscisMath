@@ -14,7 +14,7 @@ public:
 	{
 	}
 
-	triangle( const vec3& p1, const vec3& p2, const vec3& p3 )
+	triangle(const vec3& p1, const vec3& p2, const vec3& p3)
 	{
 		this->p1 = p1;
 		this->p2 = p2;
