@@ -9,14 +9,14 @@ solution (SOLUTION_NAME)
 	
 	platforms {
 		"Win32",
-		"Win64"
+		"x64"
 	}
 	
 	filter { "platforms:Win32" }
 		system "Windows"
 		architecture "x32"
 		
-	filter { "platforms:Win64" }
+	filter { "platforms:x64" }
 		system "Windows"
 		architecture "x64"
 		
@@ -38,4 +38,4 @@ project (PROJECT_NAME)
 	
 	targetdir "$(SolutionDir)../lib/"
 	debugdir "$(SolutionDir)../lib/"
-	targetname( PROJECT_NAME .. "_$(Configuration)" )
+	targetname( PROJECT_NAME .. "_$(Platform)" .. "_$(Configuration)" )
